@@ -1,12 +1,18 @@
 env=beta #or live
 docker_tag=new-bootstrap-$(date '+%Y%m%d')
-build_path=https://github.com/nanocurrency/nano-node/\#new-bootstrap
-test_path=./ #current folder
+build_path=https://github.com/nanocurrency/nano-node\#new-bootstrap
+test_path=. #current folder
 
 echo "BUILD nano_node from $build_path with tag '$docker_tag'"
 
 #build the nano node as docker container
-cd $build_path &&  docker build -f docker/node/Dockerfile -t $docker_tag .
+if [[ $build_path =~ ^\http.* ]]
+then #build directly from git
+  docker build -f docker/node/Dockerfile -t $docker_tag $build_path
+else #build from workspace
+  cd $build_path &&  docker build -f docker/node/Dockerfile -t $docker_tag .
+fi  
+
 
 #stop any current test
 cd $test_path && docker-compose -f docker-compose.$env.yml down
