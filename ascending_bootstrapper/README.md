@@ -1,4 +1,4 @@
-# Ascending boootstrapper
+# Ascending bootstrapper
 A dockerized network of 2 nano nodes.
 
 - server node which holds the ledger
