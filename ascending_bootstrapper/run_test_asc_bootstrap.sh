@@ -1,7 +1,7 @@
-env=beta
+env=beta #or live
 docker_tag=new-bootstrap-$(date '+%Y%m%d')
-build_path=/root/git/nano-workspace/pwo_nano-node
-test_path=./
+build_path=https://github.com/nanocurrency/nano-node/\#new-bootstrap
+test_path=./ #current folder
 
 echo "BUILD nano_node from $build_path with tag '$docker_tag'"
 
