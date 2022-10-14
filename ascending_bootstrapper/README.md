@@ -11,8 +11,11 @@ stats are enabled and can be seen at https://nl-nodestats.bnano.info
 
 
 ## Run the test
-copy a nano-ledger into the `server_node/Nano` or `server_node/NanoBeta` folder 
-<code>./run_test_asc_bootstrap.sh</code>
+copy a nano-ledger into the folder
+- `server_node/Nano`  (live ledger)
+- `server_node/NanoBeta`  (beta ledger)
+
+run <code>./run_test_asc_bootstrap.sh</code>
 
 You can set the following variables
 ```
