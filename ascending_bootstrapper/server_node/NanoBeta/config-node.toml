@@ -1,0 +1,25 @@
+[node]
+enable_voting = false
+preconfigured_peers = [
+  "nano_live_asc_server",
+  "nano_live_asc_client",
+"::ffff:37.191.206.60",
+"::ffff:50.99.86.254",
+"::ffff:52.233.152.195",
+"::ffff:95.216.137.218",
+"::ffff:95.217.83.244",
+"::ffff:116.202.107.97",
+"::ffff:144.76.30.190",
+"::ffff:144.76.30.235",
+"::ffff:149.56.46.236",
+"::ffff:167.172.215.52",
+"::ffff:178.63.21.53"
+]
+allow_local_peers = true
+
+[node.ipc.tcp]
+enable = true
+
+[rpc]
+enable = true
+enable_sign_hash = true

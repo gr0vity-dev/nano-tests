@@ -1,0 +1,63 @@
+version: '3'
+services:
+  nano_live_asc_server:
+    image: "nanocurrency/nano-beta:latest"
+    user: '1000'
+    container_name: nano_live_asc_server
+    command: nano_node daemon --network=beta #--disable_add_initial_peers #--disable_lazy_bootstrap --disable_legacy_bootstrap --disable_wallet_bootstrap --disable_unchecked_cleanup
+    restart: unless-stopped
+    ports:
+    - 55011:55000
+    volumes:
+    - ./server_node:/home/nanocurrency
+    networks:
+    - nano-ascending-bootstrap
+
+
+  nano_live_asc_client:
+    image: "nanocurrency/nano-beta:latest"
+    user: '1000'
+    container_name: nano_live_asc_client
+    command: nano_node daemon --network=beta #--disable_add_initial_peers #--disable_lazy_bootstrap --disable_legacy_bootstrap --disable_wallet_bootstrap --disable_unchecked_cleanup -l
+    restart: unless-stopped
+    ports:
+    - 55010:55000
+    volumes:
+    - ./client_node:/home/nanocurrency
+    networks:
+    - nano-ascending-bootstrap
+
+
+  nano_live_asc_server_exporter:
+    build:
+      context: .
+      dockerfile: ./promexporter/Dockerfile
+    container_name: nano_live_asc_server_exporter
+    restart: unless-stopped
+    environment:
+    - NANO_PROM_DEBUG=0
+    command: --rpchost nano_live_asc_server --rpc_port 55000 --push_gateway https://nl-exporter.bnano.info
+      --hostname nano_live_asc_server --runid nano-tests_ascending_bootstrap_Beta
+    networks:
+    - nano-ascending-bootstrap
+    pid: service:nano_live_asc_server
+
+
+  nano_live_asc_client_exporter:
+    build:
+      context: .
+      dockerfile: ./promexporter/Dockerfile
+    container_name: nano_live_asc_client_exporter
+    restart: unless-stopped
+    environment:
+    - NANO_PROM_DEBUG=0
+    command: --rpchost nano_live_asc_client --rpc_port 55000 --push_gateway https://nl-exporter.bnano.info
+      --hostname nano_live_asc_client --runid nano-tests_ascending_bootstrap_Beta
+    networks:
+    - nano-ascending-bootstrap
+    pid: service:nano_live_asc_client  
+  
+networks:
+  nano-ascending-bootstrap:
+    name: nano-ascending-bootstrap
+    driver: bridge

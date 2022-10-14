@@ -1,0 +1,22 @@
+[node]
+enable_voting = false
+preconfigured_peers = [
+  "nano_live_asc_server",
+  "nano_live_asc_client",
+  "peering.nano.org"
+
+]
+allow_local_peers = true
+
+[node.ipc.tcp]
+enable = true
+
+[rpc]
+enable = true
+enable_sign_hash = true
+
+[node.rocksdb]
+enable = false
+block_cache = 8192
+memory_multiplier = 3
+io_threads = 8

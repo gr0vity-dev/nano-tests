@@ -1,0 +1,11 @@
+[node]
+enable_voting = false
+preconfigured_peers = [
+  "nano_live_asc_server",
+  "nano_live_asc_client"
+]
+allow_local_peers = true
+
+[rpc]
+enable = true
+enable_sign_hash = true
