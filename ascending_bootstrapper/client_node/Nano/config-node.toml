@@ -2,11 +2,10 @@
 enable_voting = false
 preconfigured_peers = [
   "nano_live_asc_server",
-  "nano_live_asc_client",
-  "peering.nano.org"
-
+  "nano_live_asc_client"
 ]
 allow_local_peers = true
+#peering_port = 7175
 
 [node.ipc.tcp]
 enable = true

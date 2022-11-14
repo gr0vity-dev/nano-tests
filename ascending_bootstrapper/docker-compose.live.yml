@@ -1,10 +1,10 @@
 version: '3'
 services:
   nano_live_asc_server:
-    image: "nanocurrency/nano-beta:latest"
+    image: docker.io/library/new-bootstrap_2022-11-14
     user: '1000'
     container_name: nano_live_asc_server
-    command: nano_node daemon --network=live #--disable_add_initial_peers #--disable_lazy_bootstrap --disable_legacy_bootstrap --disable_wallet_bootstrap --disable_unchecked_cleanup
+    command: nano_node daemon --network=live --disable_add_initial_peers #--disable_lazy_bootstrap --disable_legacy_bootstrap --disable_wallet_bootstrap --disable_unchecked_cleanup
     restart: unless-stopped
     ports:
     - 55011:7076
@@ -15,10 +15,10 @@ services:
 
 
   nano_live_asc_client:
-    image: "nanocurrency/nano-beta:latest"
+    image: docker.io/library/new-bootstrap_2022-11-14
     user: '1000'
     container_name: nano_live_asc_client
-    command: nano_node daemon --network=live #--disable_add_initial_peers #--disable_lazy_bootstrap --disable_legacy_bootstrap --disable_wallet_bootstrap --disable_unchecked_cleanup -l
+    command: nano_node daemon --network=live --disable_add_initial_peers #--disable_lazy_bootstrap --disable_legacy_bootstrap --disable_wallet_bootstrap --disable_unchecked_cleanup -l
     restart: unless-stopped
     ports:
     - 55010:7076
@@ -37,7 +37,7 @@ services:
     environment:
     - NANO_PROM_DEBUG=0
     command: --rpchost nano_live_asc_server --rpc_port 7076 --push_gateway https://nl-exporter.bnano.info
-      --hostname nano_live_asc_server --runid nano-tests_ascending_bootstrap_Live
+      --hostname nano_live_asc_server --runid nano-tests_ascending_bootstrap_live
     networks:
     - nano-ascending-bootstrap
     pid: service:nano_live_asc_server
@@ -52,7 +52,7 @@ services:
     environment:
     - NANO_PROM_DEBUG=0
     command: --rpchost nano_live_asc_client --rpc_port 7076 --push_gateway https://nl-exporter.bnano.info
-      --hostname nano_live_asc_client --runid nano-tests_ascending_bootstrap_Live
+      --hostname nano_live_asc_client --runid nano-tests_ascending_bootstrap_live
     networks:
     - nano-ascending-bootstrap
     pid: service:nano_live_asc_client  

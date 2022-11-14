@@ -5,6 +5,7 @@ preconfigured_peers = [
   "nano_live_asc_client"
 ]
 allow_local_peers = true
+#peering_port = 7175
 
 [rpc]
 enable = true
