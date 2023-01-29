@@ -1,15 +1,13 @@
+[node]
+enable_voting = false
+allow_local_peers = true
+#peering_port = 54001
 
-[node.websocket]
-
-# WebSocket server bind address.
-# type:string,ip
-address = "::ffff:0.0.0.0"
-# Enable or disable WebSocket server.
-# type:bool
+[node.ipc.tcp]
 enable = true
 
 [rpc]
-
-# Enable or disable RPC.
-# type:bool
 enable = true
+enable_sign_hash = true
+
+
