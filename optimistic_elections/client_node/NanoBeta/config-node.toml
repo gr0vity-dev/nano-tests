@@ -1,0 +1,13 @@
+[node]
+enable_voting = false
+allow_local_peers = true
+#peering_port = 54001
+
+[node.ipc.tcp]
+enable = true
+
+[rpc]
+enable = true
+enable_sign_hash = true
+
+

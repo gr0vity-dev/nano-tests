@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  nano_optimistic_elections_client:
+    image: "${DOCKER_TAG}" 
+    user: '1000'
+    container_name: nano_optimistic_elections_client
+    command: nano_node daemon --network=${NANOENV} -l
+    restart: unless-stopped
+    ports:
+    - 55016:${RPCPORT}
+    volumes:
+    - ./client_node:/home/nanocurrency
+    networks:
+    - nano-optimistic-elections
+
+
+  nano_optimistic_elections_exporter:
+    build:
+      context: .
+      dockerfile: ./promexporter/Dockerfile
+    container_name: nano_optimistic_elections_exporter
+    restart: unless-stopped
+    environment:
+    - NANO_PROM_DEBUG=0
+    command: --rpchost nano_optimistic_elections_client --rpc_port ${RPCPORT} --push_gateway https://nl-exporter.bnano.info
+      --hostname nano_optimistic_elections_client --runid nano-${NANOENV}-${DOCKER_TAG}
+    networks:
+    - nano-optimistic-elections
+    pid: service:nano_optimistic_elections_client
+
+  
+networks:
+  nano-optimistic-elections:
+    name: nano-optimistic-elections
+    driver: bridge
