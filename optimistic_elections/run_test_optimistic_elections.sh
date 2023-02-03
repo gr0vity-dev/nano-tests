@@ -1,6 +1,6 @@
 #NANOENV=beta #or live
 NANOENV=live
-DOCKER_TAG=pwo_optimistic_elections-2
+DOCKER_TAG=gr0v1ty\/nano-node:optimisic_elections_testing
 #DOCKER_TAG=nanocurrency\/nano:V24.0
 #RPCPORT=55000
 RPCPORT=7076
